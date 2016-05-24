@@ -270,6 +270,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -363,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
         if (id == R.id.action_add) {
-            showPopu(findViewById(R.id.toolbar));
+            showPopWinShare(findViewById(R.id.toolbar));
             return true;
         }
 
@@ -418,7 +419,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showPopu (View view) {
+    private void showPopWinShare (View view) {
         if (popWinShare == null) {
             //自定义的单击事件
             OnClickLintener paramOnClickListener = new OnClickLintener();
@@ -437,7 +438,8 @@ public class MainActivity extends AppCompatActivity {
         //设置默认获取焦点
         popWinShare.setFocusable(true);
         //以某个控件的x和y的偏移量位置开始显示窗口
-        popWinShare.showAsDropDown(view, 0, 0);
+        //popWinShare.showAsDropDown(view, 400, 0);
+        popWinShare.showAtLocation(view, Gravity.TOP | Gravity.RIGHT, 10, 165);
         //如果窗口存在，则更新
         popWinShare.update();
     }
@@ -461,4 +463,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    /*private void showChangeLife () {
+        //调用
+        ChangeLifeHallWindow mLifeHallWindow = new ChangeLifeHallWindow(RobNewActivity.this, itemsOnClick);
+        mLifeHallWindow.showAtLocation(RobNewActivity.this.findViewById(R.id.base_mune), Gravity.TOP|Gravity.RIGHT, 10, 230);
+        //设置layout在PopupWindow中显示的位置
+        // 为弹出窗口实现监听类
+        private OnClickListener itemsOnClick = new OnClickListener(){
+            public void onClick(View v) {
+                mLifeHallWindow.dismiss();
+            }
+        };
+    }*/
 }
