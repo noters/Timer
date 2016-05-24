@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</LinearLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/holder_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_add"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_height="40dp"
+        android:layout_width="140dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add_white"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="增加"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_about"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_height="40dp"
+        android:layout_width="140dp">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add_white"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="关于"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+</LinearLayout>
