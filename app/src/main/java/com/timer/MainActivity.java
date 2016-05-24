@@ -287,11 +287,13 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Profile> list = new ArrayList<Profile>();
 
+    private PopWinShare popWinShare;
+
+    private ProfileAdapter profileAdapter;
+
     public ListViewCompat getListViewCompat() {
         return listViewCompat;
     }
-
-    PopWinShare popWinShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -374,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         listViewCompat = (ListViewCompat) findViewById(R.id.list);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             Profile profile = new Profile();
             if (i % 2 == 0) {
                 profile.setName("8:30");
@@ -389,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
             }
             list.add(profile);
         }
-        ProfileAdapter profileAdapter = new ProfileAdapter(this, list);
+        profileAdapter = new ProfileAdapter(this, list);
         listViewCompat.setAdapter(profileAdapter);
         listViewCompat.setOnItemClickListener(profileAdapter);
     }
@@ -408,7 +410,14 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("-----" + name);
             System.out.println("-----" + remark);
 
-            Profile profile = list.get(position);
+            Profile profile = null;
+            if (list.size() == position) {
+                profile = new Profile();
+                list.add(profile);
+            } else {
+                profile = list.get(position);
+            }
+            //Profile profile = list.get(position);
             profile.setName(name);
             profile.setRemark(remark);
 
@@ -422,8 +431,10 @@ public class MainActivity extends AppCompatActivity {
     private void showPopWinShare (View view) {
         if (popWinShare == null) {
             //自定义的单击事件
-            OnClickLintener paramOnClickListener = new OnClickLintener();
+            PopWinOnClickLintener paramOnClickListener = new PopWinOnClickLintener();
             popWinShare = new PopWinShare(MainActivity.this, paramOnClickListener, Util.dip2px(MainActivity.this, 140), Util.dip2px(MainActivity.this, 82));
+            paramOnClickListener.setPopWinShare(popWinShare);
+            paramOnClickListener.setProfileAdapter(profileAdapter);
             //监听窗口的焦点事件，点击窗口外面则取消显示
             popWinShare.getContentView().setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -444,7 +455,7 @@ public class MainActivity extends AppCompatActivity {
         popWinShare.update();
     }
 
-    class OnClickLintener implements View.OnClickListener {
+    /*class OnClickLintener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
@@ -462,7 +473,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-    }
+    }*/
 
     /*private void showChangeLife () {
         //调用

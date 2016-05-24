@@ -217,4 +217,19 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         }
     }
 
+    public void addList() {
+        int position = list.size();
+        Log.e(TAG, "add position=" + position);
+
+        Profile profile = new Profile();
+        Intent intent = new Intent();
+        intent.setClass(context, ProfilePropertyActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("profile", profile);
+        bundle.putInt("position", position);
+        intent.putExtras(bundle);
+
+        ((AppCompatActivity) context).startActivityForResult(intent, position);
+    }
+
 }
