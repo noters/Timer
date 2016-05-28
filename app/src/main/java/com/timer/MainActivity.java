@@ -270,6 +270,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -399,7 +400,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("-----requestCode " + requestCode);
+        Log.e(TAG, "requestCode=" + requestCode);
         if(resultCode == Activity.RESULT_OK) {
 
             Bundle bundle = data.getExtras();
@@ -408,8 +409,8 @@ public class MainActivity extends AppCompatActivity {
             String name = profileTemp.getName();
             String remark = profileTemp.getRemark();
 
-            System.out.println("-----" + name);
-            System.out.println("-----" + remark);
+            Log.e(TAG, "name=" + name);
+            Log.e(TAG, "remark=" + remark);
 
             Profile profile = null;
             if (list.size() == position) {

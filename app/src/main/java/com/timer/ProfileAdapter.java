@@ -90,6 +90,8 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
 
     private SlideView mLastSlideViewWithStatusOn;
 
+    private int slideViewStatus;
+
     private LayoutInflater mInflater;
 
     ProfileAdapter() {
@@ -166,17 +168,22 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        Log.e(TAG, "onItemClick position=" + position);
+        Log.e(TAG, "onItemClick position=" + position + " slideViewStatus=" + slideViewStatus);
 
         // 显示最下边黑边提示
         //Toast.makeText(MainActivity.this, list.get(position).toString(), Toast.LENGTH_SHORT).show();
 
-        Profile profile = list.get(position);
-        goPage(profile, position);
+        if (slideViewStatus == SLIDE_STATUS_OFF) {
+            Profile profile = list.get(position);
+            goPage(profile, position);
+        }
+
     }
 
     @Override
     public void onSlide(View view, int status) {
+        Log.e(TAG, "onSlide status=" + status);
+        slideViewStatus = status;
         if (mLastSlideViewWithStatusOn != null && mLastSlideViewWithStatusOn != view) {
             mLastSlideViewWithStatusOn.shrink();
         }

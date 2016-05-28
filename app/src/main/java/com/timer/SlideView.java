@@ -30,7 +30,9 @@ public class SlideView extends LinearLayout {
     public interface OnSlideListener {
         public static final int SLIDE_STATUS_OFF = 0;
         public static final int SLIDE_STATUS_START_SCROLL = 1;
-        public static final int SLIDE_STATUS_ON = 2;
+        public static final int SLIDE_STATUS_LEFT_SCROLL = 2;
+        public static final int SLIDE_STATUS_RIGHT_SCROLL = 3;
+        public static final int SLIDE_STATUS_ON = 4;
 
         /**
          * @param view current SlideView
@@ -105,9 +107,10 @@ public class SlideView extends LinearLayout {
 
             int newScrollX = scrollX - deltaX;
             if (deltaX != 0) {
-                if (newScrollX < 0) {
+                /*if (newScrollX < 0) {
                     newScrollX = 0;
-                } else if (newScrollX > mHolderWidth) {
+                } else*/
+                if (newScrollX > mHolderWidth) {
                     newScrollX = mHolderWidth;
                 }
                 this.scrollTo(newScrollX, 0);
@@ -116,14 +119,23 @@ public class SlideView extends LinearLayout {
         }
         case MotionEvent.ACTION_UP: {
             int newScrollX = 0;
+            int status = OnSlideListener.SLIDE_STATUS_OFF;
+            if (scrollX > 0) {
+                status = OnSlideListener.SLIDE_STATUS_LEFT_SCROLL;
+            }
+            if (scrollX < 0) {
+                status = OnSlideListener.SLIDE_STATUS_RIGHT_SCROLL;
+            }
             if (scrollX - mHolderWidth * 0.75 > 0) {
                 newScrollX = mHolderWidth;
+                status = OnSlideListener.SLIDE_STATUS_ON;
             }
             this.smoothScrollTo(newScrollX, 0);
             if (mOnSlideListener != null) {
-                mOnSlideListener.onSlide(this,
+                /*mOnSlideListener.onSlide(this,
                         newScrollX == 0 ? OnSlideListener.SLIDE_STATUS_OFF
-                                : OnSlideListener.SLIDE_STATUS_ON);
+                                : OnSlideListener.SLIDE_STATUS_ON);*/
+                mOnSlideListener.onSlide(this, status);
             }
             break;
         }
