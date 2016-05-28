@@ -172,14 +172,7 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         //Toast.makeText(MainActivity.this, list.get(position).toString(), Toast.LENGTH_SHORT).show();
 
         Profile profile = list.get(position);
-        Intent intent = new Intent();
-        intent.setClass(context, ProfilePropertyActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("profile", profile);
-        bundle.putInt("position", position);
-        intent.putExtras(bundle);
-
-        ((AppCompatActivity) context).startActivityForResult(intent, position);
+        goPage(profile, position);
     }
 
     @Override
@@ -222,13 +215,16 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         Log.e(TAG, "add position=" + position);
 
         Profile profile = new Profile();
+        goPage(profile, position);
+    }
+
+    private void goPage (Profile profile, int position) {
         Intent intent = new Intent();
         intent.setClass(context, ProfilePropertyActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable("profile", profile);
         bundle.putInt("position", position);
         intent.putExtras(bundle);
-
         ((AppCompatActivity) context).startActivityForResult(intent, position);
     }
 

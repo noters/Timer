@@ -35,7 +35,7 @@
         android:layout_alignRight="@+id/editTextName"
         android:layout_alignEnd="@+id/editTextName" />
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="确定"
@@ -55,6 +55,6 @@
         android:layout_alignRight="@+id/editTextRemark"
         android:layout_alignEnd="@+id/editTextRemark"
         android:layout_marginRight="43dp"
-        android:layout_marginEnd="43dp" />
+        android:layout_marginEnd="43dp" />-->
 
 </RelativeLayout>

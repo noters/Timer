@@ -391,6 +391,7 @@ public class MainActivity extends AppCompatActivity {
             }
             list.add(profile);
         }
+        
         profileAdapter = new ProfileAdapter(this, list);
         listViewCompat.setAdapter(profileAdapter);
         listViewCompat.setOnItemClickListener(profileAdapter);
