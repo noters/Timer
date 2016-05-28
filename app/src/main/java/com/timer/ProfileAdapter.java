@@ -92,8 +92,6 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
 
     private int slideViewStatus;
 
-    private LayoutInflater mInflater;
-
     ProfileAdapter() {
         super();
         //mInflater = getLayoutInflater();
@@ -140,27 +138,30 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         profile.setSlideView(slideView);
         profile.getSlideView().shrink();
 
-        holder.name.setText(profile.getName());
-        holder.type.setText(profile.getType());
-        holder.remark.setText(profile.getRemark());
+        holder.time.setText(profile.getTime());
         holder.status.setChecked(profile.isStatus());
+        holder.repeat.setText(profile.getRepeat());
+        holder.operation.setText(profile.getOperation());
+        holder.remark.setText(profile.getRemark());
         holder.deleteHolder.setOnClickListener(this);
 
         return slideView;
     }
 
     private static class ViewHolder {
-        public TextView name;
-        public TextView type;
-        public TextView remark;
+        public TextView time;
         public Switch status;
+        public TextView repeat;
+        public TextView operation;
+        public TextView remark;
         public ViewGroup deleteHolder;
 
         ViewHolder(View view) {
-            name = (TextView) view.findViewById(R.id.name);
-            type = (TextView) view.findViewById(R.id.type);
-            remark = (TextView) view.findViewById(R.id.remark);
+            time = (TextView) view.findViewById(R.id.time);
             status = (Switch) view.findViewById(R.id.status);
+            repeat = (TextView) view.findViewById(R.id.repeat);
+            operation = (TextView) view.findViewById(R.id.operation);
+            remark = (TextView) view.findViewById(R.id.remark);
             deleteHolder = (ViewGroup)view.findViewById(R.id.holder);
         }
     }

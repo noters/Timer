@@ -8,13 +8,20 @@ import android.os.Parcelable;
  */
 public class Profile implements Parcelable {
 
-    private String name;
+    // 时间
+    private String time;
 
-    private String type;
-
-    private String remark;
-
+    // 状态
     private boolean status;
+
+    // 重复
+    private String repeat;
+
+    // 操作
+    private String operation;
+
+    // 说明
+    private String remark;
 
     private SlideView slideView;
 
@@ -22,36 +29,21 @@ public class Profile implements Parcelable {
     }
 
     public Profile(Parcel in) {
-        this.name = in.readString();
-        this.type = in.readString();
-        this.remark = in.readString();
+        this.time = in.readString();
         boolean[] val = {false};
         in.readBooleanArray(val);
         this.status = val[0];
+        this.repeat = in.readString();
+        this.operation = in.readString();
+        this.remark = in.readString();
     }
 
-    public String getName() {
-        return name;
+    public String getTime() {
+        return time;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public boolean isStatus() {
@@ -60,6 +52,30 @@ public class Profile implements Parcelable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(String repeat) {
+        this.repeat = repeat;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public SlideView getSlideView() {
@@ -77,11 +93,11 @@ public class Profile implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(this.getName());
-        parcel.writeString(this.getType());
-        parcel.writeString(this.getRemark());
+        parcel.writeString(this.getTime());
         parcel.writeBooleanArray(new boolean[]{this.isStatus()});
-
+        parcel.writeString(this.getRepeat());
+        parcel.writeString(this.getOperation());
+        parcel.writeString(this.getRemark());
     }
 
     public static final Parcelable.Creator<Profile> CREATOR = new Creator<Profile>() {
@@ -95,4 +111,15 @@ public class Profile implements Parcelable {
             return new Profile(in);
         }
     };
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "time='" + time + '\'' +
+                ", status=" + status +
+                ", repeat='" + repeat + '\'' +
+                ", operation='" + operation + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

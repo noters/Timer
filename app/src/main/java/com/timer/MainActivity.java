@@ -380,15 +380,17 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 3; i++) {
             Profile profile = new Profile();
             if (i % 2 == 0) {
-                profile.setName("8:30");
-                profile.setType("每天");
-                profile.setRemark("30分钟后启动");
+                profile.setTime("8:30");
                 profile.setStatus(false);
+                profile.setRepeat("每天");
+                profile.setOperation("关机");
+                profile.setRemark("30分钟后启动");
             } else {
-                profile.setName("12:35");
-                profile.setType("周日");
-                profile.setRemark("12小时后启动");
+                profile.setTime("12:35");
                 profile.setStatus(true);
+                profile.setRepeat("周日");
+                profile.setOperation("开机");
+                profile.setRemark("12小时后启动");
             }
             list.add(profile);
         }
@@ -406,11 +408,13 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = data.getExtras();
             Profile profileTemp = bundle.getParcelable("profile");
             int position = bundle.getInt("position");
-            String name = profileTemp.getName();
+            String time = profileTemp.getTime();
+            boolean status = profileTemp.isStatus();
+            String repeat = profileTemp.getRepeat();
+            String operation = profileTemp.getOperation();
             String remark = profileTemp.getRemark();
 
-            Log.e(TAG, "name=" + name);
-            Log.e(TAG, "remark=" + remark);
+            Log.e(TAG, profileTemp.toString());
 
             Profile profile = null;
             if (list.size() == position) {
@@ -420,7 +424,10 @@ public class MainActivity extends AppCompatActivity {
                 profile = list.get(position);
             }
             //Profile profile = list.get(position);
-            profile.setName(name);
+            profile.setTime(time);
+            profile.setStatus(status);
+            profile.setRepeat(repeat);
+            profile.setOperation(operation);
             profile.setRemark(remark);
 
             //刷新listView

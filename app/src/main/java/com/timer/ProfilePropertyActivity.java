@@ -2,23 +2,28 @@ package com.timer;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ProfilePropertyActivity extends AppCompatActivity {
 
-    private EditText editTextName;
-    private EditText editTextRemark;
+    /*private EditText editTextName;
+    private EditText editTextRemark;*/
 
     private int position;
+
+    private ListView listView;
+    private ProfilePropertyAdapter profilePropertyAdapter;
+    private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
     /*private Button buttonOk;
     private Button buttonCancel;*/
@@ -69,16 +74,43 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void init () {
+    private void init() {
+
         Bundle bundle = this.getIntent().getExtras();
         Profile profile = bundle.getParcelable("profile");
         position = bundle.getInt("position");
 
-        editTextName = (EditText)findViewById(R.id.editTextName);
-        editTextRemark = (EditText)findViewById(R.id.editTextRemark);
+        Map<String, Object> map_0 = new HashMap<String, Object>();
+        map_0.put("showName", "启动任务");
+        map_0.put("showStatus", profile.isStatus());
+
+        Map<String, Object> map_1 = new HashMap<String, Object>();
+        map_1.put("showName", "时间");
+        map_1.put("showRemark", profile.getTime());
+
+        Map<String, Object> map_2 = new HashMap<String, Object>();
+        map_2.put("showName", "重复");
+        map_2.put("showRemark", profile.getRepeat());
+
+        Map<String, Object> map_3 = new HashMap<String, Object>();
+        map_3.put("showName", "操作");
+        map_3.put("showRemark", profile.getOperation());
+
+        list.add(map_0);
+        list.add(map_1);
+        list.add(map_2);
+        list.add(map_3);
+
+        listView = (ListView) findViewById(R.id.listViewProfileProperty);
+        profilePropertyAdapter = new ProfilePropertyAdapter(this, list);
+        listView.setAdapter(profilePropertyAdapter);
+        listView.setOnItemClickListener(profilePropertyAdapter);
+
+        /*editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextRemark = (EditText) findViewById(R.id.editTextRemark);
 
         editTextName.setText(profile.getName());
-        editTextRemark.setText(profile.getRemark());
+        editTextRemark.setText(profile.getRemark());*/
 
         /*buttonOk = (Button)findViewById(R.id.buttonOk);
         buttonCancel = (Button)findViewById(R.id.buttonCancel);
@@ -123,14 +155,14 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         });*/
     }
 
-    private void backCancel () {
+    private void backCancel() {
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
-    private void backOk () {
-        String name = editTextName.getText().toString();
-        String remark = editTextRemark.getText().toString();
+    private void backOk() {
+        /*String name = editTextName.getText().toString();
+        String remark = editTextRemark.getText().toString();*/
         /*SharedPreferences preferences = getSharedPreferences("Text", position);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("name", name);
@@ -140,8 +172,20 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         }
         finish();*/
 
+        String status = list.get(0).get("showStatus").toString();
+        String time = list.get(1).get("showRemark").toString();
+        String repeat = list.get(2).get("showRemark").toString();
+        String operation = list.get(3).get("showRemark").toString();
+
+
+        String remark = "后启动" + operation;
+
+
         Profile profile = new Profile();
-        profile.setName(name);
+        profile.setTime(time);
+        profile.setStatus(Boolean.parseBoolean(status));
+        profile.setRepeat(repeat);
+        profile.setOperation(operation);
         profile.setRemark(remark);
 
         Intent intent = new Intent();
