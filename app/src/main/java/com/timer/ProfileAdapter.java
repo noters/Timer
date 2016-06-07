@@ -140,6 +140,7 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
 
         holder.time.setText(profile.getTime());
         holder.status.setChecked(profile.isStatus());
+        setSwitchClick(holder.status, profile);
         holder.repeat.setText(profile.getRepeat());
         holder.operation.setText(profile.getOperation());
         holder.remark.setText(profile.getRemark());
@@ -162,8 +163,22 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
             repeat = (TextView) view.findViewById(R.id.repeat);
             operation = (TextView) view.findViewById(R.id.operation);
             remark = (TextView) view.findViewById(R.id.remark);
-            deleteHolder = (ViewGroup)view.findViewById(R.id.holder);
+            deleteHolder = (ViewGroup) view.findViewById(R.id.holder);
         }
+    }
+
+    private void setSwitchClick(Switch showStatus, final Profile profile) {
+        showStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //System.out.println("Switch profile=" + profile);
+                //System.out.println("Switch view=" + view);
+                Switch switchButton = (Switch) view;
+                boolean status = switchButton.isChecked();
+                Log.e(TAG, "status=" + status);
+                profile.setStatus(status);
+            }
+        });
     }
 
     @Override
@@ -200,7 +215,7 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
             Log.e(TAG, "onClick view=" + view);
             int hashCode = mLastSlideViewWithStatusOn.hashCode();
             int index = -1;
-            for (int i = 0; i < list.size(); i ++) {
+            for (int i = 0; i < list.size(); i++) {
                 Profile profile = list.get(i);
                 int hashCodeTemp = profile.getSlideView().hashCode();
                 if (hashCode == hashCodeTemp) {
@@ -226,7 +241,7 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         goPage(profile, position);
     }
 
-    private void goPage (Profile profile, int position) {
+    private void goPage(Profile profile, int position) {
         Intent intent = new Intent();
         intent.setClass(context, ProfilePropertyActivity.class);
         Bundle bundle = new Bundle();

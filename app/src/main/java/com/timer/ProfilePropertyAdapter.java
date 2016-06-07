@@ -2,6 +2,8 @@ package com.timer;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -80,8 +83,12 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
                     viewHolder_0 = new ViewHolder_0();
                     viewHolder_0.showName = (TextView) view
                             .findViewById(R.id.textViewShowStatusName);
-                    viewHolder_0.showStatus = (CheckBox) view
+                    /*viewHolder_0.showStatus = (CheckBox) view
                             .findViewById(R.id.checkBoxShowStatus);
+                    setCheckBoxClick(viewHolder_0.showStatus, map);*/
+                    viewHolder_0.showStatus = (Switch) view
+                            .findViewById(R.id.switchShowStatus);
+                    setSwitchClick(viewHolder_0.showStatus, map);
                     view.setTag(viewHolder_0);
                     break;
                 case TYPE_1:
@@ -125,12 +132,41 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
 
     public class ViewHolder_0 {
         TextView showName;
-        CheckBox showStatus;
+        //CheckBox showStatus;
+        Switch showStatus;
     }
 
     public class ViewHolder_1 {
         TextView showName;
         TextView showRemark;
+    }
+
+    private void setCheckBoxClick(CheckBox showStatus, final Map<String, Object> map) {
+        showStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //System.out.println("CheckBox map=" + map);
+                //System.out.println("CheckBox view=" + view);
+                CheckBox checkBox = (CheckBox) view;
+                boolean status = checkBox.isChecked();
+                Log.e(TAG, "status=" + status);
+                map.put("showStatus", status);
+            }
+        });
+    }
+
+    private void setSwitchClick(Switch showStatus, final Map<String, Object> map) {
+        showStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //System.out.println("Switch map=" + map);
+                //System.out.println("Switch view=" + view);
+                Switch switchButton = (Switch) view;
+                boolean status = switchButton.isChecked();
+                Log.e(TAG, "status=" + status);
+                map.put("showStatus", status);
+            }
+        });
     }
 
     @Override
@@ -148,25 +184,14 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
 
         switch (i) {
             case 0:
-                boolean status = Boolean.parseBoolean(statusObject.toString());
 
                 break;
             case 1:
-                String hourMinute = remarkObject.toString();
-                if (hourMinute != null && !"".equals(hourMinute)) {
-                    int index = hourMinute.indexOf(":");
-                    if (index > 0) {
-                        String hourString = hourMinute.substring(0, index);
-                        String minuteString = hourMinute.substring(index + 1);
-                        int hour = Integer.parseInt(hourString);
-                        int minute = Integer.parseInt(minuteString);
-                        setTime(hour, minute, map, baseAdapter);
-                    }
-                }
-
+                setTime(remarkObject, map, baseAdapter);
                 break;
             case 2:
-
+                Intent intent = new Intent(context, WeekDialog.class);
+                ((AppCompatActivity) context).startActivityForResult(intent, i);
                 break;
             case 3:
 
@@ -176,27 +201,48 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
         }
     }
 
-    private void setTime(int hour, int minute,final Map<String, Object> map, final BaseAdapter baseAdapter) {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(context,
-                new TimePickerDialog.OnTimeSetListener() {
+    private void setTime(Object hourMinuteObject, final Map<String, Object> map, final BaseAdapter baseAdapter) {
+        Log.e(TAG, "time=" + hourMinuteObject);
+        String hourMinute = hourMinuteObject.toString();
+        if (hourMinute != null && !"".equals(hourMinute)) {
+            int index = hourMinute.indexOf(":");
+            if (index > 0) {
+                String hourString = hourMinute.substring(0, index);
+                String minuteString = hourMinute.substring(index + 1);
+                int hour = Integer.parseInt(hourString);
+                int minute = Integer.parseInt(minuteString);
 
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Log.e(TAG, "Time=" + hourOfDay + ":" + minute);
-                String hourString = String.valueOf(hourOfDay);
-                String minuteString = String.valueOf(minute);
-                if (hourOfDay < 10) {
-                    hourString = "0" + hourOfDay;
-                }
-                if (minute < 10) {
-                    minuteString = "0" + minute;
-                }
-                String hourMinute = hourString + ":" + minuteString;
-                map.put("showRemark", hourMinute);
-                baseAdapter.notifyDataSetChanged();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                Log.e(TAG, "Time=" + hourOfDay + ":" + minute);
+                                String hourString = String.valueOf(hourOfDay);
+                                String minuteString = String.valueOf(minute);
+                                if (hourOfDay < 10) {
+                                    hourString = "0" + hourOfDay;
+                                }
+                                if (minute < 10) {
+                                    minuteString = "0" + minute;
+                                }
+                                String hourMinute = hourString + ":" + minuteString;
+                                Log.e(TAG, "new time=" + hourMinute);
+                                map.put("showRemark", hourMinute);
+                                baseAdapter.notifyDataSetChanged();
+                            }
+
+                        }, hour, minute, true);
+                timePickerDialog.show();
             }
+        }
+    }
 
-        }, hour, minute, true);
-        timePickerDialog.show();
+    private void setxn() {
+        /*new AlertDialog.Builder(self)
+                .setTitle("列表框")
+                .setItems(new String[] {"列表项1","列表项2","列表项3"}, null)
+                .setNegativeButton("确定", null)
+                .show();*/
     }
 }

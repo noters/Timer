@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProfilePropertyActivity"></activity>
+        <activity
+            android:name=".WeekDialog"
+            android:theme="@style/WeekDialogStyle"></activity>
     </application>
 
 </manifest>

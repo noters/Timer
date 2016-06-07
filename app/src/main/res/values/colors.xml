@@ -14,7 +14,7 @@
     <!-- 黄色 -->
     <color name="snow">#FFFAFA</color>
     <!-- 雪白色 -->
-    <color name="floralwhite">#FFFAF0</color>
+    <color name="floralwhite">#fffaf0</color>
     <!-- 花白色 -->
     <color name="lemonchiffon">#FFFACD</color>
     <!-- 柠檬绸色 -->
@@ -72,7 +72,7 @@
     <!-- 亮金黄色 -->
     <color name="linen">#FAF0E6</color>
     <!-- 亚麻色 -->
-    <color name="antiquewhite">#FAEBD7</color>
+    <color name="antiquewhite">#faebd7</color>
     <!-- 古董白 -->
     <color name="salmon">#FA8072</color>
     <!-- 鲜肉色 -->
@@ -148,7 +148,7 @@
     <!-- 暗金黄色 -->
     <color name="firebrick">#B22222</color>
     <!-- 火砖色 -->
-    <color name="powderblue">#B0E0E6</color>
+    <color name="powderblue">#b0e0e6</color>
     <!-- 粉蓝色 -->
     <color name="lightsteelblue">#B0C4DE</color>
     <!-- 亮钢兰色 -->
@@ -159,8 +159,6 @@
     <color name="lightblue">#ADD8E6</color>
     <!-- 亮蓝色 -->
     <color name="darkgray">#A9A9A9</color>
-    <!-- 暗灰色 -->
-    <color name="darkgrey">#A9A9A9</color>
     <!-- 暗灰色 -->
     <color name="brown">#A52A2A</color>
     <!-- 褐色 -->
@@ -238,7 +236,7 @@
     <!-- 中绿宝石 -->
     <color name="darkslateblue">#483D8B</color>
     <!-- 暗灰蓝色 -->
-    <color name="steelblue">#4682B4</color>
+    <color name="steelblue">#4682b4</color>
     <!-- 钢兰色 -->
     <color name="royalblue">#4169E1</color>
     <!-- 皇家蓝 -->
