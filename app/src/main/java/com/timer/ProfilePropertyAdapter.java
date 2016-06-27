@@ -3,6 +3,7 @@ package com.timer;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
 
     @Override
     public int getItemViewType(int position) {
+        //第一项为带选择按钮的,其它的为另一类型
         if (position == 0)
             return TYPE_0;
         else
@@ -190,8 +192,7 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
                 setTime(remarkObject, map, baseAdapter);
                 break;
             case 2:
-                Intent intent = new Intent(context, WeekDialog.class);
-                ((AppCompatActivity) context).startActivityForResult(intent, i);
+                setWeek(remarkObject, i);
                 break;
             case 3:
 
@@ -238,11 +239,16 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
         }
     }
 
-    private void setxn() {
-        /*new AlertDialog.Builder(self)
-                .setTitle("列表框")
-                .setItems(new String[] {"列表项1","列表项2","列表项3"}, null)
-                .setNegativeButton("确定", null)
-                .show();*/
+    private void setWeek(Object remarkObject, int position) {
+        String weekStrig = null;
+        if (remarkObject != null && !"".equals(remarkObject)) {
+            weekStrig = remarkObject.toString();
+        }
+        Intent intent = new Intent(context, WeekDialog.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("showRemark", weekStrig);
+        bundle.putInt("position", position);
+        intent.putExtras(bundle);
+        ((AppCompatActivity) context).startActivityForResult(intent, position);
     }
 }

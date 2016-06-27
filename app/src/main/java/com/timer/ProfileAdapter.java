@@ -141,9 +141,11 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         holder.time.setText(profile.getTime());
         holder.status.setChecked(profile.isStatus());
         setSwitchClick(holder.status, profile);
-        holder.repeat.setText(profile.getRepeat());
+        String weeks = profile.showWeek(profile.getRepeat());
+        holder.repeat.setText(weeks);
         holder.operation.setText(profile.getOperation());
-        holder.remark.setText(profile.getRemark());
+        String remark = profile.getRemark() + " " + profile.getOperation();
+        holder.remark.setText(remark);
         holder.deleteHolder.setOnClickListener(this);
 
         return slideView;

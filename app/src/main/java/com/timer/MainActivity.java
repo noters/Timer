@@ -382,13 +382,13 @@ public class MainActivity extends AppCompatActivity {
             if (i % 2 == 0) {
                 profile.setTime("8:30");
                 profile.setStatus(false);
-                profile.setRepeat("每天");
+                profile.setRepeat("0,1,2,3,4,5,6");
                 profile.setOperation("关机");
                 profile.setRemark("30分钟后启动");
             } else {
                 profile.setTime("12:35");
                 profile.setStatus(true);
-                profile.setRepeat("周日");
+                profile.setRepeat("0,4");
                 profile.setOperation("开机");
                 profile.setRemark("12小时后启动");
             }

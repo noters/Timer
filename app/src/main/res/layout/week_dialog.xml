@@ -28,18 +28,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期一"
-            android:id="@+id/textView0" />
+            android:id="@+id/weekTextView0"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox0"
+            android:id="@+id/weekCheckBox0"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -49,18 +52,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期二"
-            android:id="@+id/textView1" />
+            android:id="@+id/weekTextView1"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox1"
+            android:id="@+id/weekCheckBox1"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -70,18 +76,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期三"
-            android:id="@+id/textView2" />
+            android:id="@+id/weekTextView2"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox2"
+            android:id="@+id/weekCheckBox2"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -91,18 +100,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期四"
-            android:id="@+id/textView3" />
+            android:id="@+id/weekTextView3"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox3"
+            android:id="@+id/weekCheckBox3"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -112,18 +124,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期五"
-            android:id="@+id/textView4" />
+            android:id="@+id/weekTextView4"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox4"
+            android:id="@+id/weekCheckBox4"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -133,18 +148,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期六"
-            android:id="@+id/textView5" />
+            android:id="@+id/weekTextView5"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox5"
+            android:id="@+id/weekCheckBox5"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -154,18 +172,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:background="@color/white"
-        android:layout_marginTop="0.5dp" >
+        android:layout_marginTop="0.5dp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="星期日"
-            android:id="@+id/textView6" />
+            android:id="@+id/weekTextView6"
+            android:textSize="18sp" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox6"
+            android:id="@+id/weekCheckBox6"
             android:checked="false"
             android:layout_marginLeft="100dp" />
     </TableRow>
@@ -180,7 +201,7 @@
         android:paddingBottom="5dp">
 
         <Button
-            android:id="@+id/buttonOkId"
+            android:id="@+id/weekButtonOkId"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:background="@color/royalblue"
@@ -188,10 +209,10 @@
             android:onClick="buttonOk"
             android:text="是"
             android:textColor="#fff"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/buttonCancelId"
+            android:id="@+id/weekButtonCancelId"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -200,6 +221,6 @@
             android:onClick="buttonCancel"
             android:text="否"
             android:textColor="#333"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
     </TableRow>
 </LinearLayout>

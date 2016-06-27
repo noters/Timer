@@ -122,4 +122,38 @@ public class Profile implements Parcelable {
                 ", remark='" + remark + '\'' +
                 '}';
     }
+
+    public String showWeek (String weeks) {
+        // 0,1,2,3,4,5,6
+        // 周一 周二 周三 周四 周五 周六 周日 每天
+        String all = "0,1,2,3,4,5,6";
+        String[] defWeeks = new String[] {"周一", "周二", "周三", "周四", "周五", "周六", "周日", "每天"};
+        String result = null;
+        if (all.equals(weeks)) {
+            result = defWeeks[7];
+        } else {
+            result = weeks.replaceAll(",", " ");
+            for (int i = 0; i < defWeeks.length - 1; i ++) {
+                result = result.replace(String.valueOf(i), defWeeks[i]);
+            }
+        }
+        return result;
+    }
+
+    public String useWeek (String weeks) {
+        // 周一 周二 周三 周四 周五 周六 周日 每天
+        // 0,1,2,3,4,5,6
+        String all = "0,1,2,3,4,5,6";
+        String[] defWeeks = new String[] {"周一", "周二", "周三", "周四", "周五", "周六", "周日", "每天"};
+        String result = null;
+        if (defWeeks[7].equals(weeks)) {
+            result = all;
+        } else {
+            result = weeks.replaceAll(" ", ",");
+            for (int i = 0; i < defWeeks.length - 1; i ++) {
+                result = result.replace(defWeeks[i], String.valueOf(i));
+            }
+        }
+        return result;
+    }
 }

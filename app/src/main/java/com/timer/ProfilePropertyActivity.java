@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ProfilePropertyActivity extends AppCompatActivity {
+
+    private static final String TAG = "ProfilePropertyActivity";
 
     /*private EditText editTextName;
     private EditText editTextRemark;*/
@@ -89,8 +92,10 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         map_1.put("showRemark", profile.getTime());
 
         Map<String, Object> map_2 = new HashMap<String, Object>();
+        // 转为中文字符串显示
+        String weeks = profile.showWeek(profile.getRepeat());
         map_2.put("showName", "重复");
-        map_2.put("showRemark", profile.getRepeat());
+        map_2.put("showRemark", weeks);
 
         Map<String, Object> map_3 = new HashMap<String, Object>();
         map_3.put("showName", "操作");
@@ -177,13 +182,13 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         String repeat = list.get(2).get("showRemark").toString();
         String operation = list.get(3).get("showRemark").toString();
 
-
         String remark = "后启动" + operation;
-
 
         Profile profile = new Profile();
         profile.setTime(time);
         profile.setStatus(Boolean.parseBoolean(status));
+        // 解码为数字字符串传回主页面
+        repeat = profile.useWeek(repeat);
         profile.setRepeat(repeat);
         profile.setOperation(operation);
         profile.setRemark(remark);
@@ -196,5 +201,26 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         //setResult(CONTEXT_RESTRICTED, intent);
         setResult(Activity.RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e(TAG, "requestCode=" + requestCode);
+        if(resultCode == Activity.RESULT_OK) {
+
+            Bundle bundle = data.getExtras();
+            String weekString = bundle.getString("showRemark");
+            int position = bundle.getInt("position");
+
+            Log.e(TAG, "weekString=" + weekString + " position=" + position);
+
+            Map<String, Object> map = list.get(position);
+            map.put("showRemark", weekString);
+
+            //刷新listView
+            //ProfilePropertyAdapter profileAdapter = (ProfilePropertyAdapter) listView.getAdapter();
+            profilePropertyAdapter.notifyDataSetChanged();
+
+        }
     }
 }
