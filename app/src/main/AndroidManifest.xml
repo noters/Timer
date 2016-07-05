@@ -18,10 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfilePropertyActivity"></activity>
+        <activity android:name=".ProfilePropertyActivity" />
         <activity
             android:name=".WeekDialog"
-            android:theme="@style/WeekDialogStyle"></activity>
+            android:theme="@style/WeekDialogStyle" />
+        <activity
+            android:name=".OperationDialog"
+            android:theme="@style/WeekDialogStyle" />
     </application>
 
 </manifest>

@@ -180,6 +180,7 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
         Log.e(TAG, "item index=" + i);
         BaseAdapter baseAdapter = (BaseAdapter) adapterView.getAdapter();
         Object statusObject = map.get("showStatus");
+        Object codeObject = map.get("showCode");
         Object remarkObject = map.get("showRemark");
 
         //System.out.println("remarkObject=" + remarkObject);
@@ -192,10 +193,10 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
                 setTime(remarkObject, map, baseAdapter);
                 break;
             case 2:
-                setWeek(remarkObject, i);
+                setWeek(codeObject, i);
                 break;
             case 3:
-
+                setOption(codeObject, i);
                 break;
             default:
                 break;
@@ -239,14 +240,27 @@ public class ProfilePropertyAdapter extends BaseAdapter implements AdapterView.O
         }
     }
 
-    private void setWeek(Object remarkObject, int position) {
+    private void setWeek(Object codeObject, int position) {
         String weekStrig = null;
-        if (remarkObject != null && !"".equals(remarkObject)) {
-            weekStrig = remarkObject.toString();
+        if (codeObject != null && !"".equals(codeObject)) {
+            weekStrig = codeObject.toString();
         }
         Intent intent = new Intent(context, WeekDialog.class);
         Bundle bundle = new Bundle();
-        bundle.putString("showRemark", weekStrig);
+        bundle.putString("showCode", weekStrig);
+        bundle.putInt("position", position);
+        intent.putExtras(bundle);
+        ((AppCompatActivity) context).startActivityForResult(intent, position);
+    }
+
+    private void setOption(Object codeObject, int position) {
+        String showCode = null;
+        if (codeObject != null && !"".equals(codeObject)) {
+            showCode = codeObject.toString();
+        }
+        Intent intent = new Intent(context, OperationDialog.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("showCode", showCode);
         bundle.putInt("position", position);
         intent.putExtras(bundle);
         ((AppCompatActivity) context).startActivityForResult(intent, position);

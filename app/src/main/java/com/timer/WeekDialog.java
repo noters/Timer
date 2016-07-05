@@ -46,9 +46,9 @@ public class WeekDialog extends Activity {
         ViewHolder.weekCheckBox5 = (CheckBox) findViewById(R.id.weekCheckBox5);
         ViewHolder.weekCheckBox6 = (CheckBox) findViewById(R.id.weekCheckBox6);
         Bundle bundle = this.getIntent().getExtras();
-        String weekStrig = bundle.getString("showRemark");
+        String weeks = bundle.getString("showCode");
         position = bundle.getInt("position");
-        String weeks = new Profile().useWeek(weekStrig);
+        //String weeks = new Profile().useWeek(weekStrig);
         String[] week = weeks.split(",");
         for (int i = 0; i < week.length; i ++) {
             switch (week[i]) {
@@ -111,12 +111,13 @@ public class WeekDialog extends Activity {
         if (weeks.length() > 0) {
             weeks = weeks.substring(0, weeks.length() - 1);
         }
-        String weekString = new Profile().showWeek(weeks);
-        Log.e(TAG, "weekString=" + weekString);
+        //String weekString = new Profile().showWeek(weeks);
+        Log.e(TAG, "weeks=" + weeks);
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putString("showRemark", weekString);
+        bundle.putString("showCode", weeks);
         bundle.putInt("position", position);
+        bundle.putString("type", "repeat");
         intent.putExtras(bundle);
         //setResult(CONTEXT_RESTRICTED, intent);
         setResult(Activity.RESULT_OK, intent);

@@ -95,11 +95,14 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         // 转为中文字符串显示
         String weeks = profile.showWeek(profile.getRepeat());
         map_2.put("showName", "重复");
+        map_2.put("showCode", profile.getRepeat());
         map_2.put("showRemark", weeks);
 
         Map<String, Object> map_3 = new HashMap<String, Object>();
+        String operation = profile.showOperation(profile.getOperation());
         map_3.put("showName", "操作");
-        map_3.put("showRemark", profile.getOperation());
+        map_3.put("showCode", profile.getOperation());
+        map_3.put("showRemark", operation);
 
         list.add(map_0);
         list.add(map_1);
@@ -179,16 +182,16 @@ public class ProfilePropertyActivity extends AppCompatActivity {
 
         String status = list.get(0).get("showStatus").toString();
         String time = list.get(1).get("showRemark").toString();
-        String repeat = list.get(2).get("showRemark").toString();
-        String operation = list.get(3).get("showRemark").toString();
+        String repeat = list.get(2).get("showCode").toString();
+        String operation = list.get(3).get("showCode").toString();
 
-        String remark = "后启动" + operation;
+        String remark = "后启动";
 
         Profile profile = new Profile();
         profile.setTime(time);
         profile.setStatus(Boolean.parseBoolean(status));
         // 解码为数字字符串传回主页面
-        repeat = profile.useWeek(repeat);
+        //repeat = profile.useWeek(repeat);
         profile.setRepeat(repeat);
         profile.setOperation(operation);
         profile.setRemark(remark);
@@ -209,13 +212,24 @@ public class ProfilePropertyActivity extends AppCompatActivity {
         if(resultCode == Activity.RESULT_OK) {
 
             Bundle bundle = data.getExtras();
-            String weekString = bundle.getString("showRemark");
+            String showCode = bundle.getString("showCode");
             int position = bundle.getInt("position");
+            String type = bundle.getString("type");
 
-            Log.e(TAG, "weekString=" + weekString + " position=" + position);
+            Log.e(TAG, "showCode=" + showCode + " position=" + position + " type=" + type);
 
             Map<String, Object> map = list.get(position);
-            map.put("showRemark", weekString);
+            if (type != null && "operation".equals(type)) {
+                map.put("showCode", showCode);
+                String operationString = new Profile().showOperation(showCode);
+                map.put("showRemark", operationString);
+            } else if (type != null && "repeat".equals(type)){
+                map.put("showCode", showCode);
+                String repeatString = new Profile().showWeek(showCode);
+                map.put("showRemark", repeatString);
+            } else {
+
+            }
 
             //刷新listView
             //ProfilePropertyAdapter profileAdapter = (ProfilePropertyAdapter) listView.getAdapter();

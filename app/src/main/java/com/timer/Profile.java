@@ -156,4 +156,35 @@ public class Profile implements Parcelable {
         }
         return result;
     }
+
+    public String showOperation (String operation) {
+        return getOperationByNumOrName(operation, true);
+    }
+
+    public String enOperation (String operation) {
+        return getOperationByNumOrName(operation, false);
+    }
+
+    // true根据数值找名称,false根据名称找数值
+    private String getOperationByNumOrName (String operation, boolean flag) {
+        // 0 1 2 3
+        // 静音 铃声 振动 铃声振动
+        String[] defOperationCode = new String[] {"0", "1", "2", "3"};
+        String[] defOperationName = new String[] {"静音", "铃声", "振动", "铃声振动"};
+        String[] defOperationTemp1 = defOperationCode;
+        String[] defOperationTemp2 = defOperationName;
+        String result = null;
+        if (!flag) {
+            defOperationTemp1 = defOperationName;
+            defOperationTemp2 = defOperationCode;
+        }
+        for (int i = 0; i < defOperationTemp1.length; i ++) {
+            String operationTemp1 = defOperationTemp1[i];
+            if (operationTemp1.equals(operation)) {
+                result = defOperationTemp2[i];
+                break;
+            }
+        }
+        return result;
+    }
 }
