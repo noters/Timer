@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.timer.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,13 +95,13 @@ public class ProfilePropertyActivity extends AppCompatActivity {
 
         Map<String, Object> map_2 = new HashMap<String, Object>();
         // 转为中文字符串显示
-        String weeks = profile.showWeek(profile.getRepeat());
+        String weeks = StringUtils.encodeRepeat(profile.getRepeat());
         map_2.put("showName", "重复");
         map_2.put("showCode", profile.getRepeat());
         map_2.put("showRemark", weeks);
 
         Map<String, Object> map_3 = new HashMap<String, Object>();
-        String operation = profile.showOperation(profile.getOperation());
+        String operation = StringUtils.encodeOperation(profile.getOperation());
         map_3.put("showName", "操作");
         map_3.put("showCode", profile.getOperation());
         map_3.put("showRemark", operation);
@@ -221,11 +223,11 @@ public class ProfilePropertyActivity extends AppCompatActivity {
             Map<String, Object> map = list.get(position);
             if (type != null && "operation".equals(type)) {
                 map.put("showCode", showCode);
-                String operationString = new Profile().showOperation(showCode);
+                String operationString = StringUtils.encodeOperation(showCode);
                 map.put("showRemark", operationString);
             } else if (type != null && "repeat".equals(type)){
                 map.put("showCode", showCode);
-                String repeatString = new Profile().showWeek(showCode);
+                String repeatString = StringUtils.encodeRepeat(showCode);
                 map.put("showRemark", repeatString);
             } else {
 

@@ -24,6 +24,8 @@ import android.widget.BaseAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.timer.util.StringUtils;
+
 import java.util.List;
 
 /**
@@ -142,10 +144,10 @@ public class ProfileAdapter extends BaseAdapter implements AdapterView.OnItemCli
         holder.status.setChecked(profile.isStatus());
         setSwitchClick(holder.status, profile);
         // 获取重复的说明
-        String weeks = profile.showWeek(profile.getRepeat());
+        String weeks = StringUtils.encodeRepeat(profile.getRepeat());
         holder.repeat.setText(weeks);
         // 获取操作的说明
-        String operation = profile.showOperation(profile.getOperation());
+        String operation = StringUtils.encodeOperation(profile.getOperation());
         holder.operation.setText(operation);
         String remark = profile.getRemark() + " " + operation;
         holder.remark.setText(remark);

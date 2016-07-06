@@ -264,10 +264,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -275,7 +272,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+
+import com.timer.util.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -323,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                 if (popWinShare == null) {
                     //自定义的单击事件
                     OnClickLintener paramOnClickListener = new OnClickLintener();
-                    popWinShare = new PopWinShare(MainActivity.this, paramOnClickListener, Util.dip2px(MainActivity.this, 160), Util.dip2px(MainActivity.this, 160));
+                    popWinShare = new PopWinShare(MainActivity.this, paramOnClickListener, ScreenUtils.dip2px(MainActivity.this, 160), ScreenUtils.dip2px(MainActivity.this, 160));
                     //监听窗口的焦点事件，点击窗口外面则取消显示
                     popWinShare.getContentView().setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -441,7 +439,7 @@ public class MainActivity extends AppCompatActivity {
         if (popWinShare == null) {
             //自定义的单击事件
             PopWinOnClickLintener paramOnClickListener = new PopWinOnClickLintener();
-            popWinShare = new PopWinShare(MainActivity.this, paramOnClickListener, Util.dip2px(MainActivity.this, 140), Util.dip2px(MainActivity.this, 82));
+            popWinShare = new PopWinShare(MainActivity.this, paramOnClickListener, ScreenUtils.dip2px(MainActivity.this, 140), ScreenUtils.dip2px(MainActivity.this, 82));
             paramOnClickListener.setPopWinShare(popWinShare);
             paramOnClickListener.setProfileAdapter(profileAdapter);
             //监听窗口的焦点事件，点击窗口外面则取消显示

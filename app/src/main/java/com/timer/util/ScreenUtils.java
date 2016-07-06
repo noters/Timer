@@ -1,11 +1,11 @@
-package com.timer;
+package com.timer.util;
 
 import android.content.Context;
 
 /**
  * Created by ccc on 16/5/19.
  */
-public class Util {
+public class ScreenUtils {
     /**
      * 得到设备屏幕的宽度
      */
